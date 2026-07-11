@@ -1,0 +1,477 @@
+/* =============================================
+   Open Account Page — Exact Zerodha Clone CSS
+   ============================================= */
+
+/* ---------- Shared layout overrides ---------- */
+.evenly { justify-content: space-evenly; }
+.not-around { flex-wrap: nowrap; }
+.four { flex-basis: 30.333%; width: 30.333%; }
+
+/* =============================================
+   HERO HEAD (acop-head)
+   ============================================= */
+.acop-head {
+  background: #f8f8f9;
+  padding: 50px 20px 40px;
+  text-align: center;
+}
+.acop-head h1 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #424242;
+}
+.acop-subheading {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0;
+}
+
+/* =============================================
+   ACCOUNT OPEN SECTIONS wrapper
+   ============================================= */
+.account-open-sections {
+  padding: 60px 20px;
+}
+.acop-landing {
+  background: #f8f8f9;
+  padding: 50px 20px 60px;
+}
+.account-illus img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ---------- Signup Form ---------- */
+.account-open-signup {
+  padding: 0 20px;
+}
+.signup-head {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #424242;
+}
+.signup-help {
+  display: block;
+  color: #666;
+  font-size: .9rem;
+  margin-bottom: 24px;
+}
+
+.mobile-input-row {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.mobile-prefix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #f8f8f9;
+  border-right: 1px solid #ccc;
+  font-size: .9rem;
+  color: #424242;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mobile-prefix img {
+  height: 16px;
+  width: auto;
+  display: inline;
+}
+.nri-link {
+  font-size: .7rem;
+  color: #9b9b9b;
+  margin-left: 6px;
+}
+.nri-link a { color: #387ed1; font-weight: 400; }
+
+#user_mobile {
+  flex: 1;
+  padding: 12px 14px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: #424242;
+  background: #fff;
+  min-width: 0;
+}
+#user_mobile::placeholder { color: #bbb; }
+/* remove number spinners */
+#user_mobile::-webkit-outer-spin-button,
+#user_mobile::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#user_mobile[type=number] { -moz-appearance: textfield; }
+
+.help-text {
+  font-size: .75rem;
+  min-height: 16px;
+  margin: 4px 0 0;
+  color: #e84040;
+}
+
+.open-account-submit-container { margin-top: 14px; }
+
+.register-user {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background: #387ed1;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background .2s;
+}
+.register-user:hover { background: #2b6ab8; }
+
+/* Pulse animation dots */
+.pulse-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pulse-bubble {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  animation: acop-pulse 1.4s infinite ease-in-out;
+}
+.pulse-bubble-1 { animation-delay: 0s; }
+.pulse-bubble-2 { animation-delay: .2s; }
+.pulse-bubble-3 { animation-delay: .4s; }
+.pulse-bubble-4 { animation-delay: .6s; }
+@keyframes acop-pulse {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.acop-disclaimer {
+  font-size: .75rem;
+  color: #666;
+  margin-top: 14px;
+  line-height: 1.6;
+}
+.acop-disclaimer a { color: #387ed1; font-weight: 400; }
+.acop-disclaimer hr { border: none; border-top: 1px solid #eee; margin: 10px 0; }
+
+/* =============================================
+   INVESTMENT OPTIONS
+   ============================================= */
+.investment-options-section {
+  background: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+.investment-options-section h2 {
+  font-size: 1.375rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+  color: #424242;
+}
+.investment-options-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.investment-options {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  width: calc(50% - 24px);
+  max-width: 380px;
+  text-align: left;
+  background: #fafafb;
+  border-radius: 6px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.investment-options img {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+.investment-options h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  color: #424242;
+}
+.acop-steps-text {
+  font-size: .9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =============================================
+   STEPS SECTION
+   ============================================= */
+.acop-steps-section {
+  background: #f8f8f9;
+  padding: 60px 20px;
+}
+.acop-steps-section h2 {
+  font-size: 1.375rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #424242;
+}
+.account-open-steps {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.video-container-acop {
+  flex: 1;
+  min-width: 280px;
+  cursor: pointer;
+  position: relative;
+}
+.video-container-acop img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 6px;
+  display: block;
+}
+.account-open-steps-num {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.acop-steps-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.acop-steps {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #387ed1;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.acop-steps-container p {
+  font-size: 1rem;
+  margin: 0;
+  color: #424242;
+}
+
+/* =============================================
+   BENEFITS SECTION
+   ============================================= */
+.acop-benefits-section {
+  padding: 60px 20px;
+  background: #fff;
+}
+.acop-benefits h2 {
+  font-size: 1.375rem;
+  font-weight: 500;
+  margin-top: 16px;
+  color: #424242;
+}
+.acop-benefits .six.columns:first-child {
+  text-align: center;
+}
+.acop-benefits .six.columns:first-child img {
+  max-width: 100%;
+  max-height: 260px;
+  display: inline-block;
+}
+.acop-benefits h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #424242;
+}
+.acop-benefits p.text-grey {
+  margin-bottom: 0;
+  font-size: .95rem;
+}
+
+/* =============================================
+   ACCOUNT TYPE CARDS
+   ============================================= */
+.account-types-section {
+  padding: 60px 20px;
+  background: #fafafb;
+}
+.account-types-section h2 {
+  font-size: 1.375rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #424242;
+}
+.acop-type-card {
+  display: block;
+  padding: 28px 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  color: #424242;
+  background: #fff;
+  margin-bottom: 24px;
+  transition: box-shadow .2s, border-color .2s;
+  box-sizing: border-box;
+}
+.acop-type-card:hover {
+  box-shadow: 0 4px 16px rgba(56,126,209,.12);
+  border-color: #387ed1;
+  color: #424242;
+}
+.acop-type-card img {
+  max-height: 80px;
+  display: block;
+  margin: 0 auto 16px;
+}
+.acop-type-card h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.acop-type-card p {
+  font-size: .85rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+.account-types-section .row {
+  margin-bottom: 24px;
+}
+
+/* =============================================
+   FAQ SECTION
+   ============================================= */
+.signup-faq-section {
+  padding: 60px 20px;
+  background: #fff;
+}
+.faq-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.faq-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: #424242;
+}
+.faq-list { border-top: 1px solid #eee; }
+.faq-item { border-bottom: 1px solid #eee; }
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.question-text {
+  font-size: .95rem;
+  font-weight: 500;
+  color: #424242;
+  line-height: 1.5;
+  padding-right: 20px;
+}
+.icon-down-dir {
+  font-size: 1.1rem;
+  color: #9b9b9b;
+  flex-shrink: 0;
+  transition: transform .25s ease;
+}
+.faq-item[open] .icon-down-dir {
+  transform: rotate(180deg);
+}
+.icon-down-dir::after { content: '▾'; }
+.faq-answer {
+  padding: 0 0 18px;
+}
+.faq-answer p {
+  font-size: .9rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.8;
+}
+.faq-answer ul {
+  padding-left: 20px;
+  list-style-type: disc;
+  margin: 10px 0;
+}
+.faq-answer ul li {
+  font-size: .9rem;
+  color: #666;
+  line-height: 1.8;
+}
+.faq-answer a { color: #387ed1; }
+
+/* =============================================
+   FOOTER CTA
+   ============================================= */
+.acop-footer-section {
+  background: #f8f8f9;
+  padding: 80px 20px;
+  text-align: center;
+}
+.acop-footer-section h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #424242;
+}
+.acop-footer-section h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media only screen and (max-width: 800px) {
+  .acop-head { padding: 30px 20px; }
+  .acop-head h1 { font-size: 1.25rem; }
+  .acop-landing { padding: 30px 20px; }
+  .account-illus { display: none; }
+  .account-open-signup { padding: 0; }
+
+  .investment-options { width: 100%; max-width: 100%; }
+
+  .account-open-steps { flex-direction: column; gap: 30px; }
+  .video-container-acop { width: 100%; }
+
+  .acop-benefits .six.columns { min-width: 100%; }
+
+  .four { flex-basis: 100%; width: 100%; min-width: 100%; }
+}
