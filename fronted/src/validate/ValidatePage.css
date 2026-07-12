@@ -1,0 +1,306 @@
+/* =============================================
+   Validate (OTP) Page — Zerodha Clone CSS
+   ============================================= */
+
+/* Root layout */
+.validate-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Cancel the global body { padding-top: 65px } that LandingPage.css injects for its
+   fixed navbar — added/removed by ValidatePage's useEffect via a body class. */
+body.no-nav-padding {
+  padding-top: 0 !important;
+}
+
+/* ── HEADER ──────────────────────────────────── */
+.validate-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  /* Stay on top — not fixed, just part of the flex column */
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.validate-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.validate-logo {
+  height: 22px;
+  width: auto;
+}
+
+.validate-user-icon {
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.validate-user-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── MAIN CONTENT ────────────────────────────── */
+.validate-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 60px 40px 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Left illustration */
+.validate-illus {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validate-illus img {
+  width: 340px;
+  max-width: 100%;
+  display: block;
+}
+
+/* Right form side */
+.validate-form-side {
+  flex: 0 0 auto;
+  max-width: 360px;
+  width: 100%;
+}
+
+.validate-title {
+  font-size: 1.625rem;
+  font-weight: 500;
+  color: #1a1a2e;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.validate-subtitle {
+  font-size: 0.875rem;
+  color: #424242;
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+
+.validate-change-link {
+  color: #387ed1;
+  text-decoration: none;
+  font-weight: 400;
+}
+.validate-change-link:hover {
+  text-decoration: underline;
+}
+
+/* ── OTP INPUT WRAPPER ───────────────────────── */
+.validate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.validate-otp-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d0d0d8;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 14px;
+}
+
+.validate-otp-icon {
+  width: 48px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #d0d0d8;
+  flex-shrink: 0;
+  background: #fff;
+  padding: 0 2px;
+}
+
+.validate-otp-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.validate-otp-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  flex: 1;
+}
+
+.validate-otp-box {
+  width: 18px;
+  height: 52px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a2e;
+  text-align: center;
+  caret-color: #387ed1;
+  cursor: text;
+}
+
+.validate-otp-box::placeholder {
+  color: #b0b0bc;
+}
+
+/* Dot placeholder for empty boxes */
+.validate-otp-box:not(.filled) {
+  color: transparent;
+  background-image: radial-gradient(circle, #b0b0bc 2px, transparent 2px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 6px 6px;
+}
+
+.validate-otp-box.filled {
+  color: #1a1a2e;
+  background-image: none;
+}
+
+.validate-otp-box:focus {
+  background-image: none;
+  border-bottom: 2px solid #387ed1;
+  color: #1a1a2e;
+}
+
+/* ── ERROR ───────────────────────────────────── */
+.validate-error {
+  font-size: 0.75rem;
+  color: #e84040;
+  margin: 0 0 10px;
+}
+
+/* ── RESEND ──────────────────────────────────── */
+.validate-resend {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+.validate-resend-label {
+  font-size: 0.8rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+.validate-resend-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  color: #387ed1;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+}
+.validate-resend-btn:hover {
+  text-decoration: underline;
+}
+
+/* ── FOOTER ──────────────────────────────────── */
+.validate-footer {
+  background: #fff;
+  position: sticky;
+  bottom: 0;
+}
+
+.validate-footer-divider {
+  border: none;
+  border-top: 1px solid #e8e8e8;
+}
+
+.validate-footer-inner {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 40px;
+}
+
+.validate-continue-btn {
+  padding: 14px 40px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  border-radius: 4px;
+  cursor: not-allowed;
+  background: #b0b0bc;
+  color: #fff;
+  transition: background 0.2s;
+  min-width: 140px;
+}
+
+.validate-continue-btn.active {
+  background: #387ed1;
+  cursor: pointer;
+}
+
+.validate-continue-btn.active:hover {
+  background: #2b6ab8;
+}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media only screen and (max-width: 768px) {
+  .validate-main {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 20px 100px;
+    align-items: flex-start;
+  }
+
+  .validate-illus img {
+    width: 280px;
+  }
+
+  .validate-form-side {
+    max-width: 100%;
+  }
+
+  .validate-header {
+    padding: 0 20px;
+  }
+
+  .validate-footer-inner {
+    padding: 14px 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .validate-illus {
+    display: none;
+  }
+
+  .validate-title {
+    font-size: 1.375rem;
+  }
+}

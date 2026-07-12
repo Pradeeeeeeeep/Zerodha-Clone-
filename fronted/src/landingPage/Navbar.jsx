@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logoSvg from './assets/logo.svg';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const location = useLocation();
+  const isOpenAccount = location.pathname.startsWith('/open-account');
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -30,7 +33,11 @@ export default function Navbar() {
           <div className="nav-active seven columns" role="navigation" aria-label="main navigation">
             <ul className="navbar-links">
               <li className="hide-on-small">
-                <a id="nav_acop" href="https://zerodha.com/open-account/">Signup</a>
+                <Link
+                  id={isOpenAccount ? 'nav_acop' : undefined}
+                  className={isOpenAccount ? undefined : 'nav-links'}
+                  to="/open-account"
+                >Signup</Link>
               </li>
               <li className="hide-on-small">
                 <a className="nav-links" href="https://zerodha.com/about/">About</a>
@@ -66,7 +73,7 @@ export default function Navbar() {
                   {/* Mobile-only top links */}
                   <ul className="navbar-links show-on-mobile">
                     <li className="nav-links">
-                      <a href="https://zerodha.com/open-account/">Signup</a>
+                      <Link to="/open-account">Signup</Link>
                     </li>
                     <li>
                       <a className="nav-links" href="https://zerodha.com/about/">About</a>

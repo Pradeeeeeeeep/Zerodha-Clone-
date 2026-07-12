@@ -1,0 +1,794 @@
+/* =============================================
+   Kite Dashboard Clone — Exact UI Match
+   ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ── RESET ──────────────────────────────────── */
+.kite-root *, .kite-root *::before, .kite-root *::after { box-sizing: border-box; }
+.kite-root button { cursor: pointer; font-family: 'Inter', sans-serif; }
+.kite-root input { font-family: 'Inter', sans-serif; }
+
+/* ── ROOT ───────────────────────────────────── */
+.kite-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #eff3fb;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  color: #1b1b1b;
+  overflow: hidden;
+}
+
+/* ── TICKER BAR ─────────────────────────────── */
+.kite-ticker-bar {
+  height: 24px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 24px;
+  flex-shrink: 0;
+}
+.ticker-item { display: flex; align-items: center; gap: 6px; }
+.ticker-label { font-size: 11px; color: #777; font-weight: 500; }
+.ticker-price { font-size: 12px; font-weight: 600; }
+.ticker-change { font-size: 11px; }
+.ticker-sep { width: 1px; height: 14px; background: #ddd; }
+.green { color: #28a745; }
+.red   { color: #e84040; }
+
+/* ── TOP NAVBAR ─────────────────────────────── */
+.kite-topbar {
+  height: 48px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 0;
+  gap: 0;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.kite-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 12px;
+  width: 440px;
+  flex-shrink: 0;
+  border-right: 1px solid #e8e8e8;
+  height: 100%;
+}
+
+.kite-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.kite-watchlist-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.kite-watchlist-selector:hover { background: #f5f5f5; }
+.kite-watchlist-selector svg { color: #999; }
+
+.kite-new-badge {
+  background: #e84040;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+.kite-grid-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+.kite-grid-btn:hover { background: #f5f5f5; }
+
+/* Nav */
+.kite-topbar-nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 16px;
+  gap: 0;
+}
+
+.kite-nav-btn {
+  background: none;
+  border: none;
+  padding: 0 14px;
+  height: 100%;
+  font-size: 13px;
+  color: #555;
+  font-weight: 400;
+  position: relative;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s;
+}
+.kite-nav-btn:hover { color: #1b1b1b; }
+.kite-nav-btn.active {
+  color: #e84040;
+  font-weight: 500;
+  border-bottom-color: #e84040;
+}
+
+/* Right icons */
+.kite-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 8px;
+}
+
+.kite-icon-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+.kite-icon-btn:hover { background: #f5f5f5; color: #333; }
+
+.kite-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #d4b4f8;
+  color: #5c2f9b;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.kite-user-id {
+  font-size: 12px;
+  color: #555;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+/* ── BODY (sidebar + main) ───────────────────── */
+.kite-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── LEFT SIDEBAR ───────────────────────────── */
+.kite-sidebar {
+  width: 440px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Search */
+.kite-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+.kite-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  color: #333;
+  background: transparent;
+}
+.kite-search input::placeholder { color: #aaa; }
+.kite-search-shortcut {
+  font-size: 10px;
+  color: #aaa;
+  border: 1px solid #ddd;
+  padding: 1px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.kite-filter-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+
+/* Watchlist header */
+.kite-watchlist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px 4px;
+  flex-shrink: 0;
+}
+.kite-watchlist-title { font-size: 11px; color: #777; }
+.kite-wl-count { color: #aaa; }
+.kite-new-group-btn {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: #4184f3;
+  padding: 0;
+  font-weight: 500;
+}
+.kite-new-group-btn:hover { text-decoration: underline; }
+
+/* Group label */
+.kite-group-label {
+  padding: 4px 12px 6px;
+  font-size: 11px;
+  color: #999;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* Stock list */
+.kite-stock-list {
+  flex: 1;
+  overflow-y: auto;
+}
+.kite-stock-list::-webkit-scrollbar { width: 4px; }
+.kite-stock-list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+.kite-stock-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+  min-height: 52px;
+}
+.kite-stock-row:hover, .kite-stock-row.hovered { background: #f8f9ff; }
+
+.kite-stock-left {
+  flex: 1;
+  min-width: 0;
+}
+.kite-stock-name {
+  font-size: 13px;
+  font-weight: 500;
+  display: block;
+}
+.kite-stock-tags {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+.kite-tag {
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.kite-tag-bse { background: #fff3cd; color: #856404; }
+.kite-tag-event { background: #d1ecf1; color: #0c5460; }
+.kite-tag-nse { background: #e8f4fd; color: #1a659e; }
+
+.kite-stock-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.kite-stock-change { font-size: 12px; }
+.kite-stock-pct { font-size: 11px; }
+.kite-stock-price { font-size: 13px; font-weight: 500; }
+
+/* Hover actions */
+.kite-stock-actions {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 4px;
+  background: #f8f9ff;
+}
+.kite-action-buy, .kite-action-sell, .kite-action-more {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kite-action-buy { background: #4184f3; color: #fff; }
+.kite-action-sell { background: #e84040; color: #fff; }
+.kite-action-more { background: #eee; color: #555; font-size: 16px; font-weight: 400; }
+
+/* Sidebar footer */
+.kite-sidebar-footer {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-top: 1px solid #eee;
+  flex-shrink: 0;
+  gap: 4px;
+}
+.kite-page-tabs {
+  display: flex;
+  gap: 0;
+  flex: 1;
+}
+.kite-page-tab {
+  min-width: 28px;
+  height: 26px;
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: #999;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.kite-page-tab:hover { background: #f5f5f5; color: #333; }
+.kite-page-tab.active {
+  color: #e84040;
+  font-weight: 600;
+  border-bottom: 2px solid #e84040;
+  border-radius: 0;
+}
+.kite-settings-btn, .kite-add-wl-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  color: #999;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.kite-settings-btn:hover, .kite-add-wl-btn:hover { background: #f5f5f5; color: #333; }
+
+/* ── MAIN CONTENT ───────────────────────────── */
+.kite-main {
+  flex: 1;
+  overflow-y: auto;
+  background: #eff3fb;
+}
+.kite-main::-webkit-scrollbar { width: 6px; }
+.kite-main::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+/* ── ALERT BANNER ───────────────────────────── */
+.kite-alert-banner {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 12.5px;
+  color: #555;
+  margin: 12px 16px;
+  line-height: 1.5;
+}
+
+/* ── SUB TABS ───────────────────────────────── */
+.kite-subtabs {
+  display: flex;
+  gap: 0;
+  padding: 0 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #fff;
+  flex-shrink: 0;
+}
+.kite-subtab {
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  font-family: 'Inter', sans-serif;
+}
+.kite-subtab:hover { color: #333; }
+.kite-subtab.active { color: #e84040; font-weight: 500; border-bottom-color: #e84040; }
+
+/* ── EMPTY STATE ─────────────────────────────── */
+.kite-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+  gap: 16px;
+  color: #999;
+}
+.kite-empty-icon { opacity: 0.5; margin-bottom: 4px; }
+.kite-empty p { font-size: 13px; color: #999; margin: 0; text-align: center; }
+.kite-btn-blue {
+  padding: 10px 28px;
+  background: #4184f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.kite-btn-blue:hover { background: #2f6de8; }
+.kite-link-blue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4184f3;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.kite-link-blue:hover { text-decoration: underline; }
+.kite-link-icon {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #4184f3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #4184f3;
+}
+
+/* ── DASHBOARD HOME ──────────────────────────── */
+.kite-dash-page { padding: 0; }
+
+.kite-dash-tabs {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 16px;
+}
+
+.kite-greeting {
+  padding: 16px 20px 12px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #1b1b1b;
+}
+
+/* Margin cards */
+.kite-margin-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 0 20px 16px;
+}
+.kite-margin-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 16px 20px;
+}
+.kite-margin-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.kite-margin-card-title svg { color: #777; }
+.kite-margin-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+.kite-margin-big {
+  font-size: 28px;
+  font-weight: 400;
+  color: #1b1b1b;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.kite-margin-label { font-size: 11px; color: #999; }
+.kite-margin-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+.kite-margin-row-item { display: flex; justify-content: space-between; gap: 30px; color: #666; }
+.kite-margin-row-item a { color: #4184f3; font-size: 12px; text-decoration: none; }
+.kite-margin-row-item a:hover { text-decoration: underline; }
+
+/* Holdings placeholder */
+.kite-holdings-placeholder {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  margin: 0 20px 16px;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+/* Bottom market section */
+.kite-market-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 0 20px 20px;
+}
+
+.kite-market-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.kite-market-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.kite-market-card-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+.kite-market-card-sub {
+  font-size: 11px;
+  color: #999;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+.kite-market-more-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+/* Gainers/Losers table */
+.kite-gainers-table { padding: 4px 0; }
+.kite-gainer-row {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px;
+  border-bottom: 1px solid #f8f8f8;
+  gap: 10px;
+}
+.kite-gainer-row:hover { background: #f8f9ff; }
+.kite-gainer-name { flex: 1; font-size: 12px; font-weight: 500; color: #333; }
+.kite-gainer-exch { font-size: 10px; color: #aaa; }
+.kite-gainer-price { font-size: 12px; font-weight: 500; min-width: 55px; text-align: right; }
+.kite-gainer-pct { font-size: 11px; min-width: 50px; text-align: right; display: flex; align-items: center; gap: 2px; justify-content: flex-end; }
+.kite-view-all-row { padding: 8px 16px; }
+.kite-view-all-link { font-size: 12px; color: #4184f3; text-decoration: none; }
+.kite-view-all-link:hover { text-decoration: underline; }
+
+/* IPO table */
+.kite-ipo-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.kite-ipo-tab {
+  background: none;
+  border: none;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #777;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.kite-ipo-tab.active { color: #e84040; border-bottom-color: #e84040; font-weight: 500; }
+.kite-ipo-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.3px;
+}
+.kite-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #28a745;
+  animation: pulse-dot 1.5s infinite;
+}
+@keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+.kite-ipo-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f8f8f8;
+  gap: 8px;
+}
+.kite-ipo-row:hover { background: #f8f9ff; }
+.kite-ipo-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e8f0fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: #4184f3;
+  flex-shrink: 0;
+}
+.kite-ipo-info { flex: 1; }
+.kite-ipo-name { font-size: 12px; font-weight: 500; color: #333; }
+.kite-ipo-ticker { font-size: 10px; color: #aaa; margin-left: 4px; }
+.kite-ipo-dates { font-size: 11px; color: #999; text-align: right; white-space: nowrap; }
+
+/* Market overview / chart */
+.kite-overview-card { grid-column: 1 / -1; }
+.kite-overview-inner { padding: 12px 16px; }
+.kite-overview-title { font-size: 13px; font-weight: 500; color: #333; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.kite-chart-area {
+  position: relative;
+  height: 80px;
+}
+.kite-chart-area svg { width: 100%; height: 100%; }
+.kite-chart-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #bbb;
+  margin-top: 4px;
+}
+
+/* ── FUNDS PAGE ─────────────────────────────── */
+.kite-funds-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 20px;
+}
+.kite-funds-upi-label {
+  font-size: 11px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.kite-btn-add {
+  padding: 8px 20px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.kite-btn-add:hover { background: #218838; }
+.kite-btn-withdraw {
+  padding: 8px 20px;
+  background: #4184f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.kite-btn-withdraw:hover { background: #2f6de8; }
+
+.kite-funds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 0 20px 20px;
+}
+.kite-funds-panel {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.kite-funds-panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+.kite-funds-panel-title-inner { display: flex; align-items: center; gap: 6px; }
+.kite-funds-panel-actions { display: flex; gap: 12px; }
+.kite-funds-panel-actions a { font-size: 12px; color: #4184f3; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+.kite-funds-panel-actions a:hover { text-decoration: underline; }
+
+.kite-funds-top-items { padding: 12px 0; }
+.kite-funds-top-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid #f5f5f5;
+}
+.kite-funds-top-item:last-child { border-bottom: none; }
+.kite-funds-item-label { font-size: 13px; color: #555; }
+.kite-funds-item-val-big { font-size: 22px; font-weight: 400; color: #1b1b1b; }
+.kite-funds-divider { height: 1px; background: #f0f0f0; margin: 4px 0; }
+.kite-funds-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: #555;
+}
+.kite-funds-item-val { color: #1b1b1b; font-size: 13px; }
+
+/* ── HOLDINGS PAGE ───────────────────────────── */
+.kite-holdings-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 10px;
+}
+.kite-holdings-title { font-size: 15px; font-weight: 500; color: #333; }
+.kite-select {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #555;
+  background: #fff;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}

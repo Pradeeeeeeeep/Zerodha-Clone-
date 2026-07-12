@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../landingPage/Navbar';
 import Footer from '../landingPage/Footer';
 import '../landingPage/LandingPage.css';
@@ -140,16 +141,22 @@ const faqs = [
 export default function OpenAccountPage() {
   const [mobile, setMobile] = useState('');
   const [error, setError] = useState('');
+  const [showPulse, setShowPulse] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!/^\d{10}$/.test(mobile)) {
       setError('Please enter a valid 10-digit mobile number');
+      setShowPulse(false);
       return;
     }
     setError('');
-    // In a real app this would call the Zerodha API
-    window.open(`https://zerodha.com/open-account/?mobile=${mobile}`, '_blank');
+    setShowPulse(true);
+    setTimeout(() => {
+      setShowPulse(false);
+      navigate('/validate', { state: { phone: mobile } });
+    }, 600);
   }
 
   return (
@@ -197,10 +204,6 @@ export default function OpenAccountPage() {
                         alt="India flag"
                       />
                       +91
-                      <span className="nri-link">
-                        NRI account?{' '}
-                        <a href="https://zerodha.com/open-account/nri/">Click here</a>
-                      </span>
                     </span>
                     <input
                       type="number"
@@ -227,7 +230,7 @@ export default function OpenAccountPage() {
                       className="register-user"
                     >
                       Get OTP
-                      <div className="pulse-container">
+                      <div className={`pulse-container${showPulse ? ' pulse-active' : ''}`}>
                         <div className="pulse-bubble pulse-bubble-1"></div>
                         <div className="pulse-bubble pulse-bubble-2"></div>
                         <div className="pulse-bubble pulse-bubble-3"></div>

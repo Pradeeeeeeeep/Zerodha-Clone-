@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import landingSvg from './assets/landing.svg';
 
 export default function Hero() {
@@ -13,9 +14,9 @@ export default function Hero() {
         <p className="landing-subheading text-center">
           Online platform to invest in stocks, derivatives, mutual funds, ETFs, bonds, and more.
         </p>
-        <a href="https://zerodha.com/open-account" className="button" id="acop_link">
+        <Link to="/open-account" className="button" id="acop_link">
           Sign up for free
-        </a>
+        </Link>
       </div>
     </section>
   );
