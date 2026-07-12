@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logoSvg from '../landingPage/assets/logo.svg';
 import otpSvg from './assets/page-otp-DLrksP7J.svg';
 import './ValidatePage.css';
@@ -8,6 +8,7 @@ const OTP_LENGTH = 6;
 
 export default function ValidatePage() {
   const location = useLocation();
+  const navigate = useNavigate();
   // Phone number can be passed via navigation state from open-account page
   const phone = location.state?.phone || '9999999999';
 
@@ -72,8 +73,8 @@ export default function ValidatePage() {
       setError('Please enter the complete OTP');
       return;
     }
-    // In real app: verify OTP via API
-    alert(`OTP ${code} submitted for +91 ${phone}`);
+    // Navigate to dashboard after successful OTP entry
+    navigate('/dashboard');
   }
 
   const isComplete = otp.every(d => d !== '');

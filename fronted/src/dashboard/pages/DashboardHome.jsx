@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const topGainers = [
   { name: 'GODREJIND', exch: 'NSE', price: '1417.70', pct: '16.28%' },
@@ -37,24 +37,78 @@ const upcomingIpos = [
   { name: 'OYO',                    ticker: 'OYO',      dates: 'To be announced',          color: '#fde8e8' },
 ];
 
-// Simple sparkline path generator
-function SparkLine({ color = '#4184f3' }) {
-  // Simulated NIFTY 50 path points (normalized 0-100)
-  const points = [60, 58, 62, 64, 60, 55, 52, 56, 58, 54, 50, 48, 52, 56, 54, 58, 60, 55, 52, 56, 58, 60, 62];
+// Dynamic sparkline from backend
+function SparkLine({ candles = [], color = '#4184f3' }) {
+  if (!candles || candles.length === 0) {
+    // Fallback static sparkline while loading
+    const staticPts = [60,58,62,64,60,55,52,56,58,54,50,48,52,56,54,58,60,55,52,56,58,60,62];
+    const w = 600; const h = 80;
+    const min = Math.min(...staticPts); const max = Math.max(...staticPts);
+    const xStep = w / (staticPts.length - 1);
+    const toY = v => h - ((v - min) / (max - min)) * h;
+    return (
+      <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
+        <polyline
+          points={staticPts.map((p, i) => `${i * xStep},${toY(p)}`).join(' ')}
+          fill="none" stroke={color} strokeWidth="2" opacity="0.5"
+        />
+      </svg>
+    );
+  }
+
+  const closes = candles.map(c => c.close);
   const w = 600; const h = 80;
-  const min = Math.min(...points); const max = Math.max(...points);
-  const xStep = w / (points.length - 1);
-  const toY = v => h - ((v - min) / (max - min)) * h;
-  const d = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${i * xStep},${toY(p)}`).join(' ');
+  const minP = Math.min(...closes); const maxP = Math.max(...closes);
+  const range = maxP - minP || 1;
+  const xStep = w / Math.max(1, closes.length - 1);
+  const toY = v => h - ((v - minP) / range) * h;
+
+  const linePoints = closes.map((p, i) => `${i * xStep},${toY(p)}`).join(' ');
+  // Area fill path
+  const areaPath = [
+    `M0,${h}`,
+    ...closes.map((p, i) => `L${i * xStep},${toY(p)}`),
+    `L${(closes.length - 1) * xStep},${h}`,
+    'Z'
+  ].join(' ');
+
+  const isUp = closes[closes.length - 1] >= closes[0];
+  const lineColor = isUp ? '#28a745' : '#e84040';
+
   return (
     <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
-      <polyline points={points.map((p, i) => `${i * xStep},${toY(p)}`).join(' ')} fill="none" stroke={color} strokeWidth="2" />
+      <defs>
+        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={lineColor} stopOpacity="0.25"/>
+          <stop offset="100%" stopColor={lineColor} stopOpacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d={areaPath} fill="url(#sparkGrad)" />
+      <polyline points={linePoints} fill="none" stroke={lineColor} strokeWidth="2" />
     </svg>
   );
 }
 
-export default function DashboardHome() {
+export default function DashboardHome({ onOpenChart }) {
   const [ipoTab, setIpoTab] = useState('Upcoming IPOs');
+  const [marketCandles, setMarketCandles] = useState([]);
+  const [marketLoading, setMarketLoading] = useState(true);
+
+  // Fetch NIFTY 50 daily candles from backend for Market Overview
+  useEffect(() => {
+    const from = new Date();
+    from.setDate(from.getDate() - 180);
+    const fromStr = from.toISOString().slice(0, 10);
+    const toStr = new Date().toISOString().slice(0, 10);
+
+    fetch(`http://localhost:8080/api/chart/historical?instrumentToken=256265&interval=day&from=${fromStr}&to=${toStr}`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data)) setMarketCandles(data);
+      })
+      .catch(() => { /* keep static fallback */ })
+      .finally(() => setMarketLoading(false));
+  }, []);
 
   return (
     <div className="kite-dash-page">
@@ -231,10 +285,40 @@ export default function DashboardHome() {
               </svg>
               Market overview
               <span style={{ marginLeft: 4, fontSize: 11, color: '#aaa' }}>■ NIFTY 50</span>
+              {!marketLoading && marketCandles.length > 0 && (() => {
+                const last = marketCandles[marketCandles.length - 1];
+                const prev = marketCandles[marketCandles.length - 2];
+                const chg = prev ? last.close - prev.close : 0;
+                const pct = prev ? (chg / prev.close) * 100 : 0;
+                const up = chg >= 0;
+                return (
+                  <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: up ? '#28a745' : '#e84040' }}>
+                    {Number(last.close).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                    &nbsp;{up ? '▲' : '▼'} {Math.abs(pct).toFixed(2)}%
+                  </span>
+                );
+              })()}
+              {onOpenChart && (
+                <button
+                  onClick={() => onOpenChart('NIFTY 50')}
+                  style={{
+                    background: 'none', border: '1px solid #4184f3', color: '#4184f3',
+                    borderRadius: 4, padding: '2px 8px', fontSize: 11, cursor: 'pointer',
+                    marginLeft: 8, fontFamily: 'Inter, sans-serif'
+                  }}
+                >
+                  Full Chart
+                </button>
+              )}
             </div>
-            <div className="kite-chart-area"><SparkLine /></div>
+            <div className="kite-chart-area">
+              {marketLoading
+                ? <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#ccc', fontSize: 12 }}>Loading chart…</div>
+                : <SparkLine candles={marketCandles} />
+              }
+            </div>
             <div className="kite-chart-labels">
-              <span>Oct 26</span><span>Jan 26</span><span>Apr 26</span><span>Jul 26</span>
+              <span>Oct 25</span><span>Jan 26</span><span>Apr 26</span><span>Jul 26</span>
             </div>
           </div>
         </div>

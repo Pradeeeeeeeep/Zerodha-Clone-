@@ -39,6 +39,54 @@
 .green { color: #28a745; }
 .red   { color: #e84040; }
 
+/* ── Live/Demo badge in ticker bar ─────────────── */
+.ticker-live-badge {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 700; letter-spacing: .5px;
+  padding: 2px 7px; border-radius: 3px;
+  margin-left: auto;
+}
+.ticker-live-badge.live    { color: #28a745; background: rgba(40,167,69,.08); }
+.ticker-live-badge.demo    { color: #f59e0b; background: rgba(245,158,11,.08); }
+.ticker-live-badge.error   { color: #e84040; background: rgba(232,64,64,.08); }
+.ticker-live-badge.connecting { color: #999; }
+
+.ticker-live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+  animation: livePulse 1.5s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(.7); }
+}
+
+/* ── Price flash animation ──────────────────────── */
+@keyframes flashUp {
+  0%   { background: rgba(40, 167, 69, 0.22); }
+  100% { background: transparent; }
+}
+@keyframes flashDown {
+  0%   { background: rgba(232, 64, 64, 0.22); }
+  100% { background: transparent; }
+}
+.price-flash-up   { animation: flashUp   .5s ease-out; border-radius: 2px; }
+.price-flash-down { animation: flashDown .5s ease-out; border-radius: 2px; }
+.price-flash-none { }
+
+/* ── Loading shimmer for price ──────────────────── */
+.loading-shimmer {
+  display: inline-block; min-width: 56px; color: transparent !important;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f4f4f4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 3px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* ── TOP NAVBAR ─────────────────────────────── */
 .kite-topbar {
   height: 48px;
@@ -385,7 +433,9 @@
 .kite-main {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   background: #eff3fb;
+  position: relative;  /* needed for charts-page absolute fill */
 }
 .kite-main::-webkit-scrollbar { width: 6px; }
 .kite-main::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
@@ -474,7 +524,11 @@
 }
 
 /* ── DASHBOARD HOME ──────────────────────────── */
-.kite-dash-page { padding: 0; }
+.kite-dash-page {
+  padding: 0;
+  min-height: 100%;          /* lets content grow taller than viewport */
+  padding-bottom: 32px;      /* breathing room at bottom of scroll */
+}
 
 .kite-dash-tabs {
   background: #fff;
@@ -791,4 +845,32 @@
   background: #fff;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
+}
+
+/* ── Chart action button in watchlist hover ─────────────── */
+.kite-action-chart {
+  background: none;
+  border: none;
+  color: #4184f3;
+  padding: 2px 5px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s;
+}
+.kite-action-chart:hover {
+  background: rgba(65, 132, 243, 0.12);
+}
+
+/* ── Charts page full-height fill ──────────────────────────── */
+/* Uses absolute positioning so it fills .kite-main without
+   overriding overflow on the parent (which would break scrolling
+   on all other dashboard pages). */
+.kite-main > .charts-page {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  overflow: hidden;
 }
